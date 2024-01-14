@@ -1,12 +1,18 @@
 import React from "react"
 import { FiShoppingBag } from 'react-icons/fi';
 import { BsFillPencilFill } from 'react-icons/bs';
-import { Link } from "react-router-dom";
-import { isUserLoggedIn } from "../services/AuthService";
+import { Link, useNavigate } from "react-router-dom";
+import { isUserLoggedIn, logout } from "../services/AuthService";
 
 export default function Navbar() {
 
     const isAuth = isUserLoggedIn();
+    const navigate = useNavigate();
+
+    function handleLogout() {
+        logout();
+        navigate('/login');
+    }
 
     return (
         <header className="flex justify-between border-b border-gray-300 p-2">
@@ -34,7 +40,10 @@ export default function Navbar() {
                 }
                 {
                     isAuth && (
-                        <Link to='/login'>
+                        <Link 
+                            to='/login'
+                            onClick={handleLogout}
+                        >
                             <button>Logout</button>
                         </Link>
                     )
