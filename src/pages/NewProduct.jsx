@@ -18,6 +18,18 @@ export default function NewProduct() {
 
     // 업로드할 이미지 파일
     const [file, setFile] = useState();
+
+
+    const handleChange = (e) => {
+
+        const { name, value, files, checked } = e.target;
+
+        if (name === "file") {
+            setFile(files && files[0]);
+        }
+
+        return;
+    }
     
 
     return (
@@ -38,6 +50,7 @@ export default function NewProduct() {
                     accept="image/*"
                     name="file"
                     required
+                    onChange={handleChange}
                 />
                 <input 
                     type="text"
