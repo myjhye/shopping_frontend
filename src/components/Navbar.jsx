@@ -21,7 +21,9 @@ export default function Navbar() {
                 >
                     <BsFillPencilFill />
                 </Link>
-                <button>Login</button>
+                <Link to='/login'>
+                    <button>Login</button>
+                </Link>
             </nav>
         </header>
     )
