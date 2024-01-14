@@ -1,20 +1,51 @@
 import { useState } from "react"
 import { Link } from "react-router-dom";
+import { signupAPICall } from "../services/AuthService";
 
 export default function Signup() {
 
+    const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        const register = {name, username, email, password}
+        console.log(register);
+
+        signupAPICall(register)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }
+
+
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 shadow-md rounded-md w-96">
                 <h2 className="text-2xl font-semibold mb-4">회원가입</h2>
-                <form>
+                <form onSubmit={handleLogin}>
                     <div className="mb-4">
-                        <label htmlFor="username" className="block font-medium mb-1">유저명</label>
+                        <label htmlFor="name" className="block font-medium mb-1">이름</label>
+                        <input
+                            type="name"
+                            id="name"
+                            name="name"
+                            className="w-full border rounded-md px-3 py-2"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="username" className="block font-medium mb-1">닉네임</label>
                         <input
                             type="username"
                             id="username"
