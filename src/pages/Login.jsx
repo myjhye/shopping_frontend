@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
-import { loginAPICall, storeToken } from "../services/AuthService";
+import { loginAPICall, saveLoggedInUser, storeToken } from "../services/AuthService";
 
 export default function Login() {
 
@@ -13,14 +13,17 @@ export default function Login() {
         
         e.preventDefault();
 
-        loginAPICall(usernameOrEmail, password)
+        await loginAPICall(usernameOrEmail, password)
             .then((res) => {
                 console.log(res.data);
 
                 const token = 'Basic ' + window.btoa(usernameOrEmail + ":" + password);
                 storeToken(token);
 
-                navigate("/");
+                saveLoggedInUser(usernameOrEmail);
+                navigate("/products");
+
+                window.location.reload(false);
             })
             .catch(error => {
                 console.error(error);
