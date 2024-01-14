@@ -3,12 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import AllProducts from './pages/AllProducts';
 import NewProduct from './pages/NewProduct';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import { isUserLoggedIn } from './services/AuthService';
+
+function AuthenticatedRoute({children}) {
+
+  const isAuth = isUserLoggedIn();
+
+  if (isAuth) {
+    return children;
+  }
+
+  return <Navigate to="/" />
+}
 
 const router = createBrowserRouter([
   {
@@ -37,13 +49,17 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: (
-          <AllProducts />
+          <AuthenticatedRoute>
+            <AllProducts />
+          </AuthenticatedRoute>
         )
       },
       {
         path: '/products/new',
         element: (
-          <NewProduct />
+          <AuthenticatedRoute>
+            <NewProduct />
+          </AuthenticatedRoute>
         )
       },
     ]
