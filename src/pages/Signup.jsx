@@ -10,7 +10,7 @@ export default function Signup() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const handleLogin = async (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
 
         const register = {name, username, email, password}
@@ -31,63 +31,63 @@ export default function Signup() {
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 shadow-md rounded-md w-96">
                 <h2 className="text-2xl font-semibold mb-4">회원가입</h2>
-                <form onSubmit={handleLogin}>
+                <form onSubmit={handleSignup}>
                     <div className="mb-4">
-                        <label htmlFor="name" className="block font-medium mb-1">이름</label>
                         <input
                             type="name"
                             id="name"
                             name="name"
                             className="w-full border rounded-md px-3 py-2"
                             value={name}
+                            placeholder="성명"
                             onChange={(e) => setName(e.target.value)}
                             required
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="username" className="block font-medium mb-1">닉네임</label>
                         <input
                             type="username"
                             id="username"
                             name="username"
                             className="w-full border rounded-md px-3 py-2"
                             value={username}
+                            placeholder="사용자 이름"
                             onChange={(e) => setUsername(e.target.value)}
                             required
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="email" className="block font-medium mb-1">이메일</label>
                         <input
                             type="email"
                             id="email"
                             name="email"
                             className="w-full border rounded-md px-3 py-2"
                             value={email}
+                            placeholder="이메일"
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="password" className="block font-medium mb-1">비밀번호</label>
                         <input
                             type="password"
                             id="password"
                             name="password"
                             className="w-full border rounded-md px-3 py-2"
                             value={password}
+                            placeholder="비밀번호"
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="confirmPassword" className="block font-medium mb-1">비밀번호 확인</label>
                         <input
                             type="password"
                             id="confirmPassword"
                             name="confirmPassword"
                             className="w-full border rounded-md px-3 py-2"
                             value={confirmPassword}
+                            placeholder="비밀번호 확인"
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
                         />
