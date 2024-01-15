@@ -17,7 +17,8 @@ export default function Login() {
             .then((res) => {
                 console.log(res.data);
 
-                const token = 'Basic ' + window.btoa(usernameOrEmail + ":" + password);
+                //const token = 'Basic ' + window.btoa(usernameOrEmail + ":" + password);
+                const token = 'Bearer ' + res.data.accessToken;
                 storeToken(token);
 
                 saveLoggedInUser(usernameOrEmail);
