@@ -10,6 +10,7 @@ import NewProduct from './pages/NewProduct';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { isUserLoggedIn } from './services/AuthService';
+import ProductDetail from './pages/ProductDetail';
 
 function AuthenticatedRoute({children}) {
 
@@ -51,6 +52,14 @@ const router = createBrowserRouter([
         element: (
           <AuthenticatedRoute>
             <AllProducts />
+          </AuthenticatedRoute>
+        )
+      },
+      {
+        path: '/products/:id',
+        element: (
+          <AuthenticatedRoute>
+            <ProductDetail />
           </AuthenticatedRoute>
         )
       },
