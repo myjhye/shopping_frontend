@@ -19,16 +19,38 @@ export default function NewProduct() {
     // 업로드할 이미지 파일
     const [file, setFile] = useState();
 
-
     const handleChange = (e) => {
 
         const { name, value, files, checked } = e.target;
 
+        // 사진
         if (name === "file") {
             setFile(files && files[0]);
+            return;
         }
 
-        return;
+        // 사이즈 : 다수 선택
+        if (name === "options") {
+            const updatedOptions = checked
+                ? [...product.options, value]
+                : product.options.filter((option) => option !== value);
+
+            const sortedOptions = ["XS", "S", "M", "L", "XL"].filter((option) =>
+                updatedOptions.includes(option)
+            );
+            
+            setProduct((product) => ({
+                ...product,
+                options: sortedOptions,
+            }));
+            return;
+        }
+
+        // 그 외
+        setProduct((product) => ({
+            ...product,
+            [name]: value,
+        }));
     }
     
 
@@ -58,6 +80,7 @@ export default function NewProduct() {
                     value={product.title}
                     placeholder="제품명"
                     required
+                    onChange={handleChange}
                 />
                 <input 
                     type="text"
@@ -65,6 +88,7 @@ export default function NewProduct() {
                     value={product.description}
                     placeholder="제품 설명"
                     required
+                    onChange={handleChange}
                 />
 
                 {/* 성별 */}
@@ -75,6 +99,7 @@ export default function NewProduct() {
                             name="gender"
                             value="여성"
                             checked={product.gender.includes("여성")}
+                            onChange={handleChange}
                         />
                         여성
                     </label>
@@ -84,6 +109,7 @@ export default function NewProduct() {
                             name="gender"
                             value="남성"
                             checked={product.gender.includes("남성")}
+                            onChange={handleChange}
                         />
                         남성
                     </label>
@@ -93,6 +119,7 @@ export default function NewProduct() {
                             name="gender"
                             value="공용"
                             checked={product.gender.includes("공용")}
+                            onChange={handleChange}
                         />
                         공용
                     </label>
@@ -105,7 +132,8 @@ export default function NewProduct() {
                             type="checkbox"
                             name="category"
                             value="상의"
-                            checked={product.gender.includes("상의")}
+                            checked={product.category.includes("상의")}
+                            onChange={handleChange}
                         />
                         상의
                     </label>
@@ -114,7 +142,8 @@ export default function NewProduct() {
                             type="checkbox"
                             name="category"
                             value="하의"
-                            checked={product.gender.includes("하의")}
+                            checked={product.category.includes("하의")}
+                            onChange={handleChange}
                         />
                         하의
                     </label>
@@ -123,7 +152,8 @@ export default function NewProduct() {
                             type="checkbox"
                             name="category"
                             value="원피스"
-                            checked={product.gender.includes("원피스")}
+                            checked={product.category.includes("원피스")}
+                            onChange={handleChange}
                         />
                         원피스
                     </label>
@@ -131,8 +161,9 @@ export default function NewProduct() {
                         <input 
                             type="checkbox"
                             name="category"
-                            value="원피스"
-                            checked={product.gender.includes("원피스")}
+                            value="모자"
+                            checked={product.category.includes("모자")}
+                            onChange={handleChange}
                         />
                         모자
                     </label>
@@ -140,8 +171,9 @@ export default function NewProduct() {
                         <input 
                             type="checkbox"
                             name="category"
-                            value="원피스"
-                            checked={product.gender.includes("원피스")}
+                            value="신발"
+                            checked={product.category.includes("신발")}
+                            onChange={handleChange}
                         />
                         신발
                     </label>
@@ -150,7 +182,8 @@ export default function NewProduct() {
                             type="checkbox"
                             name="category"
                             value="기타"
-                            checked={product.gender.includes("기타")}
+                            checked={product.category.includes("기타")}
+                            onChange={handleChange}
                         />
                         기타
                     </label>
@@ -163,7 +196,8 @@ export default function NewProduct() {
                             type="checkbox"
                             name="options"
                             value="XS"
-                            checked={product.gender.includes("XS")}
+                            checked={product.options.includes("XS")}
+                            onChange={handleChange}
                         />
                         XS
                     </label>
@@ -172,7 +206,8 @@ export default function NewProduct() {
                             type="checkbox"
                             name="options"
                             value="S"
-                            checked={product.gender.includes("S")}
+                            checked={product.options.includes("S")}
+                            onChange={handleChange}
                         />
                         S
                     </label>
@@ -181,7 +216,8 @@ export default function NewProduct() {
                             type="checkbox"
                             name="options"
                             value="M"
-                            checked={product.gender.includes("M")}
+                            checked={product.options.includes("M")}
+                            onChange={handleChange}
                         />
                         M
                     </label>
@@ -190,7 +226,8 @@ export default function NewProduct() {
                             type="checkbox"
                             name="options"
                             value="L"
-                            checked={product.gender.includes("L")}
+                            checked={product.options.includes("L")}
+                            onChange={handleChange}
                         />
                         L
                     </label>
@@ -199,7 +236,8 @@ export default function NewProduct() {
                             type="checkbox"
                             name="options"
                             value="XL"
-                            checked={product.gender.includes("XL")}
+                            checked={product.options.includes("XL")}
+                            onChange={handleChange}
                         />
                         XL
                     </label>
