@@ -26,6 +26,18 @@ export default function ProductDetail() {
                     <p className="py-4 text-lg">{ product.description }</p>
                     <div className="flex items-center">
                         <label htmlFor="select">옵션: </label>
+                        <select
+                            id='select'
+                            className="p-2 m-4 flex-1 border-2 border-dashed border-brand outline-none"
+                            onChange={(e) => setSelected(e.target.value)}
+                            value={selected}
+                        >
+                            {product.options.split(',').map((option, index) => (
+                                <option key={index} value={option.trim()}>
+                                    {option.trim()}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <button
                         className="bg-brand text-white py-2 px-4 rounded-lg hover:brightness-110"
