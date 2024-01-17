@@ -10,6 +10,13 @@ axios.interceptors.request.use(function (config) {
     return Promise.reject(error);
 });
 
+// 조회
 export const listProducts = () => {
     return axios.get(REST_API_BASE_URL);
 }
+
+// 등록
+export const createProduct = (product) => {
+    return axios.post(REST_API_BASE_URL, product);
+}
+
